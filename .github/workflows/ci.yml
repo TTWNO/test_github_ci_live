@@ -18,3 +18,28 @@ jobs:
           toolchain: stable
       - name: Run Tests
         run: cargo test
+  fmt:
+    runs-on: ubuntu-latest
+    name: Check Formatting
+    steps:
+      - name: Git Checkout
+        uses: actions/checkout@v3
+      - name: Install Rust
+        uses: dtolnay/rust-toolchain@master
+        with:
+          components: rustfmt
+          toolchain: stable
+      - name: Run Tests
+        run: cargo fmt --check
+  clippy:
+    runs-on: ubuntu-latest
+    name: Run Clippy
+    steps:
+      - name: Git Checkout
+        uses: actions/checkout@v3
+      - name: Install Rust
+        uses: dtolnay/rust-toolchain@master
+        with:
+          toolchain: stable
+      - name: Run Tests
+        run: cargo clippy
